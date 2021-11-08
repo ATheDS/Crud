@@ -15,7 +15,7 @@ public class Banco extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS tb_users(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, email VARCHAR, telefone INTEGER(11),UNIQUE(email))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS tb_users(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, email VARCHAR, telefone INTEGER,UNIQUE(email))");
 
 
 

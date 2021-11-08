@@ -13,17 +13,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder > {
 
     Context context;
     Banco db;
-    int emailAtual;
-    int materia;
+    ArrayList<User> users;
 
 
-    public AdapterUsers(Context context,Banco db) {
+    public AdapterUsers(Context context, Banco db, ArrayList<User> users) {
+        this.users = users;
         this.context = context;
         this.db = db;//((MaisEstudoApplication) getApplication()).getDb();
+
     }
 
     @NonNull
@@ -38,24 +41,24 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder > {
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder myHolder, @SuppressLint("RecyclerView") int i) {
-        i += 1;
+        User useratual = users.get(i);
 
-        if(i!= emailAtual){
-            if(db.selecionarUser(i).getNome()!=null){
-                myHolder.mNameTv.setText( db.selecionarUser(i).getNome());
-
-            }
+        if(useratual.getNome()!=null){
+            myHolder.mNameTv.setText(useratual.getNome());
 
 
-            }
 
-            myHolder.mEmailTv.setText(db.selecionarUser(i).getEmail());
-            myHolder.mTelefone.setText(String.valueOf(db.selecionarUser(i).getTelefone()));
-        int finalI = i;
+
+        }
+
+        myHolder.mEmailTv.setText(useratual.getEmail());
+        myHolder.mTelefone.setText(String.valueOf(useratual.getTelefone()));
+        int finalI = i+1;
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,EditarActivity.class);
+                intent.putExtra("useratual",useratual);
                 intent.putExtra("id",finalI);
                 context.startActivity(intent);
             }
@@ -68,7 +71,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder > {
     public int getItemCount() {
         int size;
         try{
-            size = db.getDbSize();
+            size = users.size();
             return size;
         }catch (Exception e){
             return size = 0;
@@ -88,5 +91,3 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder > {
         }
     }
 }
-
-
