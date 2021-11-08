@@ -14,13 +14,14 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
     FloatingActionButton criar;
     Banco db;
     RecyclerView recyclerView;
     AdapterUsers adapterUsers;
-    ArrayList<User> userlist;
+    List<User> userlist;
     SearchView searchView;
 
     @Override
@@ -28,16 +29,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         db = ((Application) getApplication()).getDb();
-        userlist = new ArrayList<User>();
-        try{
-            for (int i = 1 ; i <= db.getDbSize()  ; i++) {
-                userlist.add(db.selecionarUser(i));
+        userlist = db.allUser();
 
-            }
-
-        }catch (Exception e){
-
-        }
         searchView = findViewById(R.id.search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

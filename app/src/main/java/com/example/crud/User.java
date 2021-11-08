@@ -4,20 +4,28 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     String nome,email;
-    int telefone,id;
+    Integer telefone,id;
 
-    public User(int id,String nometxt, String emailtxt, int telefonetxt) {
+    public User(Integer id,String nometxt, String emailtxt, Integer telefonetxt) {
         this.id = id;
         this.nome = nometxt;
         this.email = emailtxt;
         this.telefone = telefonetxt;
     }
 
-    public User(String nometxt, String emailtxt, int telefonetxt) {
+    public User(String nometxt, String emailtxt, Integer telefonetxt) {
 
         this.nome = nometxt;
         this.email = emailtxt;
         this.telefone = telefonetxt;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -36,11 +44,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getTelefone() {
+    public Integer getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(Integer telefone) {
         this.telefone = telefone;
     }
 }
